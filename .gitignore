@@ -1,3 +1,11 @@
+# Build
 build
+
+# Secrets
 secrets
+
+# Logs
 nodeos.log
+
+# Node
+node_modules
