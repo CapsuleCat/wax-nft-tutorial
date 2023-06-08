@@ -1,5 +1,3 @@
-
-
 /**
  * Make sure the name is a valid eosio name
  */

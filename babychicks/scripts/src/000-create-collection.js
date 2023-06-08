@@ -1,22 +1,13 @@
 import { transact } from "./utilities/transact";
+import { name } from "./utilities/name";
+import socials from "./utilities/socials";
 
 const data = [
     { "key": "name", "value": ["string", "Baby Chicks"] },
     { "key": "img", "value": ["string", ""] },
     { "key": "description", "value": ["string", "This is a collection created for tutorials"] },
     { "key": "url", "value": ["string", "https://capsulecat.com"] },
-    {
-        "key": "socials", "value": ["string", JSON.stringify({
-            "twitter": "thecapsulecat",
-            "github": "capsulecat",
-            // Other examples
-            // "facebook": "myfacebook",
-            // "medium": "mymedium",
-            // "telegram": "mytelegram",
-            // "youtube": "myyoutube",
-            // "discord": "mydiscord"
-        })]
-    },
+    { "key": "socials", "value": ["string", JSON.stringify(socials)] },
     {
         "key": "creator_info", "value": ["string", JSON.stringify({
             "address": "",
