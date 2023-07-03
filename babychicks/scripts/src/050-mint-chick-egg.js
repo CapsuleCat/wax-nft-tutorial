@@ -1,27 +1,28 @@
 import { transact } from "./utilities/transact.mjs";
 import { collectionName, name } from "./utilities/name.mjs";
 
-const schema = [
-    { "name": "name", "type": "string" },
-    { "name": "img", "type": "image" },
-    { "name": "description", "type": "string" },
-    { "name": "url", "type": "string" },
-    { "name": "socials", "type": "string" },
-    { "name": "created_at", "type": "uint64" }
+const nftData = [
+    { "key": "created_at", "value": ["uint64", Date.now()] },
 ];
 
-async function createChickEggSchema() {
+async function mintChickEgg() {
     const author = process.env.WAX_ACCOUNT;
 
     if (!author) {
         throw new Error("Missing WAX_ACCOUNT");
     }
 
+    const templateId = process.env.TEMPLATE_ID;
+
+    if (!templateId) {
+        throw new Error("Missing TEMPLATE_ID");
+    }
+
     try {
         return await transact([
             {
                 account: "atomicassets",
-                name: "createschema",
+                name: "mintasset",
                 authorization: [
                     {
                         actor: author,
@@ -29,10 +30,14 @@ async function createChickEggSchema() {
                     },
                 ],
                 data: {
-                    authorized_creator: author,
+                    authorized_minter: author,
                     collection_name: collectionName('babychicknft'),
                     schema_name: name('chickegg'),
-                    schema_format: schema
+                    new_asset_owner: author,
+                    template_id: templateId,
+                    immutable_data: nftData,
+                    mutable_data: [],
+                    tokens_to_back: [],
                 },
             },
         ])
@@ -43,6 +48,6 @@ async function createChickEggSchema() {
 }
 
 (async () => {
-    const result = await createChickEggSchema();
+    const result = await mintChickEgg();
     console.log("Result", result);
 })();

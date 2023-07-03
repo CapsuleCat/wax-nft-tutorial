@@ -1,35 +1,30 @@
-import { name } from "./utilities/name";
-import socials from "./utilities/socials";
+import { collectionName, name } from "./utilities/name.mjs";
+import socials from "./utilities/socials.mjs";
+import { transact } from "./utilities/transact.mjs";
 
 const templateEpic = [
     { "key": "name", "value": ["string", "Epic Baby Chick"] },
-    // TODO ipfs image string
-    { "key": "img", "value": ["image", ""] },
+    { "key": "img", "value": ["string", "QmUwqZ64McMgzzP9Hv1qXvEUaubcHQZwAVpdfjKpn9M5vv"] },
     { "key": "description", "value": ["string", "Epic baby chick"] },
     { "key": "rarity", "value": ["string", "Epic"] },
-    // TODO view url
     { "key": "url", "value": ["string", "https://capsulecat.com"] },
     { "key": "socials", "value": ["string", JSON.stringify(socials)] }
 ];
 
 const templateRare = [
     { "key": "name", "value": ["string", "Rare Baby Chick"] },
-    // TODO ipfs image string
-    { "key": "img", "value": ["image", ""] },
+    { "key": "img", "value": ["string", "QmdQsG8JNfPSSxNzHE5gwhHmBSJNVYaWLWYwpYpEGX8UJ6"] },
     { "key": "description", "value": ["string", "Rare baby chick"] },
     { "key": "rarity", "value": ["string", "Rare"] },
-    // TODO view url
     { "key": "url", "value": ["string", "https://capsulecat.com"] },
     { "key": "socials", "value": ["string", JSON.stringify(socials)] }
 ];
 
 const templateCommon = [
     { "key": "name", "value": ["string", "Common Baby Chick"] },
-    // TODO ipfs image string
-    { "key": "img", "value": ["image", ""] },
+    { "key": "img", "value": ["string", "Qmd2FHnTHw3ernkYegh2xNQK1FFKTd8PwA21ToRhGLvddz"] },
     { "key": "description", "value": ["string", "Common baby chick"] },
     { "key": "rarity", "value": ["string", "Common"] },
-    // TODO view url
     { "key": "url", "value": ["string", "https://capsulecat.com"] },
     { "key": "socials", "value": ["string", JSON.stringify(socials)] }
 ];
@@ -42,19 +37,19 @@ async function createBabyChickTemplates() {
     }
 
     try {
-        await transact([
+        return await transact([
             {
                 account: "atomicassets",
                 name: "createtempl",
                 authorization: [
                     {
-                        actor: auth,
+                        actor: author,
                         permission: "active",
                     },
                 ],
                 data: {
-                    authorized_creator: auth,
-                    collection_name: name('babychicks'),
+                    authorized_creator: author,
+                    collection_name: collectionName('babychicknft'),
                     schema_name: name('babychick'),
 
                     transferable: true,
@@ -68,13 +63,13 @@ async function createBabyChickTemplates() {
                 name: "createtempl",
                 authorization: [
                     {
-                        actor: auth,
+                        actor: author,
                         permission: "active",
                     },
                 ],
                 data: {
-                    authorized_creator: auth,
-                    collection_name: name('babychicks'),
+                    authorized_creator: author,
+                    collection_name: collectionName('babychicknft'),
                     schema_name: name('babychick'),
 
                     transferable: true,
@@ -88,13 +83,13 @@ async function createBabyChickTemplates() {
                 name: "createtempl",
                 authorization: [
                     {
-                        actor: auth,
+                        actor: author,
                         permission: "active",
                     },
                 ],
                 data: {
-                    authorized_creator: auth,
-                    collection_name: name('babychicks'),
+                    authorized_creator: author,
+                    collection_name: collectionName('babychicknft'),
                     schema_name: name('babychick'),
 
                     transferable: true,
@@ -112,5 +107,5 @@ async function createBabyChickTemplates() {
 
 (async () => {
     const result = await createBabyChickTemplates();
-    console.log(result);
+    console.log("Result", result);
 })();

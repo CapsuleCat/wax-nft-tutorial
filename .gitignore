@@ -1,5 +1,8 @@
 # Build
-build
+build/
+!build/CMakeCache.txt
+!build/cmake_install.cmake
+!build/Makefile
 
 # Secrets
 secrets

@@ -19,10 +19,13 @@ export function name(str) {
         throw new Error("Last character can't be a dot");
     }
 
-    // Last character can't be after the letter 'j'
-    if (charmap.indexOf(str[str.length - 1]) > 16) {
-        throw new Error("Last character can't be after the letter 'j'");
+    return str;
+}
+
+export function collectionName(str) {
+    if (str.length !== 12) {
+        throw new Error("Collection name must be 12 characters");
     }
 
-    return str;
+    return name(str);
 }

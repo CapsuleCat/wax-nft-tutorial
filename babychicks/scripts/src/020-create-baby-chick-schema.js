@@ -1,5 +1,5 @@
-import { transact } from "./utilities/transact";
-import { name } from "./utilities/name";
+import { transact } from "./utilities/transact.mjs";
+import { collectionName, name } from "./utilities/name.mjs";
 
 const schema = [
     { "name": "name", "type": "string" },
@@ -22,7 +22,7 @@ async function createBabyChickSchema() {
     }
 
     try {
-        await transact([
+        return await transact([
             {
                 account: "atomicassets",
                 name: "createschema",
@@ -34,7 +34,7 @@ async function createBabyChickSchema() {
                 ],
                 data: {
                     authorized_creator: author,
-                    collection_name: name('babychicks'),
+                    collection_name: collectionName('babychicknft'),
                     schema_name: name('babychick'),
                     schema_format: schema
                 },
@@ -48,5 +48,5 @@ async function createBabyChickSchema() {
 
 (async () => {
     const result = await createBabyChickSchema();
-    console.log(result);
+    console.log("Result", result);
 })();

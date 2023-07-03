@@ -1,12 +1,11 @@
-import { name } from "./utilities/name";
-import socials from "./utilities/socials";
+import { collectionName, name } from "./utilities/name.mjs";
+import socials from "./utilities/socials.mjs";
+import { transact } from "./utilities/transact.mjs";
 
 const template = [
     { "key": "name", "value": ["string", "Baby Chick Egg"] },
-    // TODO ipfs image string
-    { "key": "img", "value": ["image", ""] },
+    { "key": "img", "value": ["string", "QmTAJmKRFUo4SnmKiq6ixM4FuhAQeReHuCBKE1NZZRpkM9"] },
     { "key": "description", "value": ["string", "Baby Chick Egg for hatching"] },
-    // TODO hatching url
     { "key": "url", "value": ["string", "https://capsulecat.com"] },
     { "key": "socials", "value": ["string", JSON.stringify(socials)] }
 ];
@@ -19,21 +18,20 @@ async function createChickEggTemplates() {
     }
 
     try {
-        await transact([
+        return await transact([
             {
                 account: "atomicassets",
                 name: "createtempl",
                 authorization: [
                     {
-                        actor: auth,
+                        actor: author,
                         permission: "active",
                     },
                 ],
                 data: {
-                    authorized_creator: auth,
-                    collection_name: name('babychicks'),
+                    authorized_creator: author,
+                    collection_name: collectionName('babychicknft'),
                     schema_name: name('chickegg'),
-
                     transferable: true,
                     burnable: true,
                     max_supply: 100,
@@ -49,5 +47,5 @@ async function createChickEggTemplates() {
 
 (async () => {
     const result = await createChickEggTemplates();
-    console.log(result);
+    console.log("Result", result);
 })();

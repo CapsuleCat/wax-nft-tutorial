@@ -1,10 +1,10 @@
-import { transact } from "./utilities/transact";
-import { name } from "./utilities/name";
-import socials from "./utilities/socials";
+import { transact } from "./utilities/transact.mjs";
+import { collectionName, name } from "./utilities/name.mjs";
+import socials from "./utilities/socials.mjs";
 
 const data = [
     { "key": "name", "value": ["string", "Baby Chicks"] },
-    { "key": "img", "value": ["string", ""] },
+    { "key": "img", "value": ["string", "QmRTg2dhvSR7Lbmwvfv4z5c7Eisj7Lb199wsc5ijXHGEBZ"] },
     { "key": "description", "value": ["string", "This is a collection created for tutorials"] },
     { "key": "url", "value": ["string", "https://capsulecat.com"] },
     { "key": "socials", "value": ["string", JSON.stringify(socials)] },
@@ -18,8 +18,8 @@ const data = [
     },
     {
         "key": "images", "value": ["string", JSON.stringify({
-            "banner_1920x500": "",
-            "logo_512x512": ""
+            // "banner_1920x500": "",
+            "logo_512x512": "QmRTg2dhvSR7Lbmwvfv4z5c7Eisj7Lb199wsc5ijXHGEBZ"
         })]
     }
 ]
@@ -32,7 +32,7 @@ async function createCollection() {
     }
 
     try {
-        await transact([
+        return await transact([
             {
                 account: "atomicassets",
                 name: "createcol",
@@ -44,9 +44,11 @@ async function createCollection() {
                 ],
                 data: {
                     author,
-                    collection_name: name('babychicks'),
+                    collection_name: collectionName('babychicknft'),
                     allow_notify: true,
-                    authorized_accounts: [],
+                    authorized_accounts: [
+                        name(author),
+                    ],
                     notify_accounts: [],
                     market_fee: 0.05,
                     data: data,
@@ -61,5 +63,5 @@ async function createCollection() {
 
 (async () => {
     const result = await createCollection();
-    console.log(result);
+    console.log("Result", result);
 })()
