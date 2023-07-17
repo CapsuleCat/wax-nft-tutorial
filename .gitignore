@@ -1,8 +1,14 @@
 # Build
-build/
-!build/CMakeCache.txt
-!build/cmake_install.cmake
-!build/Makefile
+# Ignore all files in the build directory except for the Makefile
+*/build/CMakeFiles/
+*/build/babychicks/
+*/build/babychicks_project-prefix/
+*/build/guestbook/
+*/build/guestbook_project-prefix/
+*/build/helloworld/
+*/build/helloworld_project-prefix/
+*/build/simplenft/
+*/build/simplenft_project-prefix/
 
 # Secrets
 secrets
