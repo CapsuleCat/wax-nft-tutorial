@@ -8,7 +8,7 @@ CONTRACT simplenft : public contract {
       using contract::contract;
 
       ACTION create(string cat_name);
-      ACTION transfer(uint64_t token_id, name to);
+      ACTION transfer(uint64_t token_id, name from, name to);
 
       TABLE cat_nft_s {
         uint64_t token_id;

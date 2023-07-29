@@ -2,6 +2,8 @@
 
 This repository contains a collection of tutorials for creating NFTs on the WAX blockchain.
 
+You can read the full documentation at [our Dev.to collection](https://dev.to/idmontie/series/23860).
+
 ## Getting Started
 
 ### Prerequisites

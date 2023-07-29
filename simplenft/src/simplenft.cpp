@@ -3,6 +3,7 @@
 using namespace std;
 
 ACTION simplenft::create(string cat_name) {
+   // Only the contract owner can create cats
    require_auth(get_self());
 
    // Check that the cat name doesn't already exist
@@ -18,13 +19,15 @@ ACTION simplenft::create(string cat_name) {
    });
 }
 
-ACTION simplenft::transfer(uint64_t token_id, name to) {
+ACTION simplenft::transfer(uint64_t token_id, name from, name to) {
+   require_auth(from);
+
    // Check that the token exists
    auto cat_itr = cats.find(token_id);
    check(cat_itr != cats.end(), "Cat does not exist");
 
    // Check that the sender owns the token
-   check(cat_itr->issuer == get_self(), "You do not own this cat");
+   check(cat_itr->issuer == from, "You do not own this cat");
 
    // Check that the recipient exists
    check(is_account(to), "Recipient account does not exist");
